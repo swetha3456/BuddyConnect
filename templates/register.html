@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuddyConnect</title>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <form action="#" method="POST">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <label>Gender</label>
+        <div class="gender">
+            <label><input type="radio" name="gender" value="male" required> Male</label>
+            <label><input type="radio" name="gender" value="female"> Female</label>
+            <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="location">Location</label>
+        <select id="location" name="location" required>
+            <option value="">Select a location</option>
+            <option value="new-york">New York</option>
+            <option value="london">London</option>
+            <option value="tokyo">Tokyo</option>
+            <option value="paris">Paris</option>
+        </select>
+
+        <div class="checkbox-group">
+            <label>Event Interests</label>
+            <label><input type="checkbox" name="interests" value="tech"> Tech Events</label><br>
+            <label><input type="checkbox" name="interests" value="sports"> Sports</label><br>
+            <label><input type="checkbox" name="interests" value="music"> Music Concerts</label><br>
+            <label><input type="checkbox" name="interests" value="art"> Art Exhibitions</label><br>
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+</body>
+</html>
