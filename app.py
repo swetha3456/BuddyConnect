@@ -106,7 +106,8 @@ def event_details(eventID):
         "eventDate" : formatted_date,
         "description" : event_info[8],
         "userFullName" : get_full_name(event_info[9]),
-        "pastEventsCount" : num_events_posted(event_info[9])
+        "pastEventsCount" : num_events_posted(event_info[9]),
+        "gender" : get_gender(event_info[9])
     }
 
     return render_template("eventpage.html", context=context)

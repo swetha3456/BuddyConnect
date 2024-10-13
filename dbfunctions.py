@@ -105,5 +105,14 @@ def num_events_posted(email):
 
     return number
 
+def get_gender(email):
+    conn = sqlite3.connect("database.db", timeout=10)
+    cursor = conn.cursor()
+    cursor.execute(f"select gender from users where email='{email}'")
+    gender = cursor.fetchone()[0]
+    conn.close()
+
+    return gender
+
 if __name__ == "__main__":
     init_db()
