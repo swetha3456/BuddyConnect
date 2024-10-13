@@ -6,8 +6,12 @@ from email_notif import send_email
 app = Flask(__name__)
 app.secret_key = b"030a8ee0eb274b3e7fd9db490b0fd6a532b1fa1f1fd6825c5852c7363358c4b6"
 
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def home():
+    if request.method == "POST":
+        session.clear()
+        return redirect(url_for("login"))
+    
     if "user_email" not in session:
         return redirect(url_for("login"))
 
@@ -24,8 +28,9 @@ def home():
         formatted_endtime = endtime_object.strftime("%I:%M %p")
 
         event_details = {
+            "eventID" : event[0],
             "eventName" : event[1],
-            "eventType" : event[2],
+            "eventType" : event[2].capitalize(),
             "venue" : event[3],
             "eventDate" : formatted_date,
             "startTime" : formatted_starttime,
@@ -99,7 +104,7 @@ def event_details(eventID):
 
     context = {
         "eventName" : event_info[1],
-        "eventType" : event_info[2],
+        "eventType" : event_info[2].capitalize(),
         "venue" : event_info[3],
         "startTime" : formatted_starttime,
         "endTime" : formatted_endtime,
@@ -107,7 +112,7 @@ def event_details(eventID):
         "description" : event_info[8],
         "userFullName" : get_full_name(event_info[9]),
         "pastEventsCount" : num_events_posted(event_info[9]),
-        "gender" : get_gender(event_info[9])
+        "gender" : get_gender(event_info[9]).capitalize()
     }
 
     return render_template("eventpage.html", context=context)

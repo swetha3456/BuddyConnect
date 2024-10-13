@@ -7,21 +7,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-    <button onclick="window.location.href='{{ url_for('home') }}'">Back</button>
+    <div class="back-button">
+        <a href="{{ url_for('home') }}" style="text-decoration: none;">
+            <button>Back</button>
+        </a>
+    </div>
 
     <h1>{{ context["eventName"] }}</h1>
 
+    <div class="event-details">
     <p><strong>Event Type:</strong> {{ context["eventType"] }}</p>
     <p><strong>Date:</strong> {{ context["eventDate"] }}</p>
     <p><strong>Time:</strong> {{ context["startTime"] }} - {{ context["endTime"] }}</p>
     <p><strong>Venue:</strong> {{ context["venue"] }}</p>
     <p><strong>Description:</strong> {{ context["description"] }}</p>
+    </div>
 
     <h2>Posted By</h2>
+    <div class="event-details">
     <p><strong>Name:</strong> {{ context["userFullName"] }}</p>
-    <p><strong>Past Events Posted:</strong> {{ context["pastEventsCount"] }}</p>
     <p><strong>Gender:</strong> {{ context["gender"] }}</p>
+    <p><strong>Total Events Posted:</strong> {{ context["pastEventsCount"] }}</p>
+    </div>
 
     <form method="POST">
         <button type="submit">Share Contact Details</button>
