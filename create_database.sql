@@ -13,9 +13,9 @@ CREATE TABLE events (
     event_type VARCHAR(50) NOT NULL,
     venue VARCHAR(100) NOT NULL,
     location VARCHAR(100) NOT NULL,
-    event_date DATE NOT NULL,
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL,
+    event_date VARCHAR(50) NOT NULL,
+    start_time VARCHAR(50) NOT NULL,
+    end_time VARCHAR(50) NOT NULL,
     description VARCHAR(600),
     created_by VARCHAR(100) NOT NULL,
     FOREIGN KEY (created_by) REFERENCES users(email) ON DELETE CASCADE
