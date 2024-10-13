@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuddyConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="container">
+<div class="container" style="width: 500px; margin: 0 auto;">
     <h2>Register</h2>
     <form action="#" method="POST">
         <label for="firstName">First Name</label>
@@ -21,9 +22,11 @@
 
         <label>Gender</label>
         <div class="gender">
+            <div class="label-container">
             <label><input type="radio" name="gender" value="male" required> Male</label>
             <label><input type="radio" name="gender" value="female"> Female</label>
             <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
         </div>
 
         <label for="password">Password</label>
@@ -32,19 +35,21 @@
         <label for="location">Location</label>
         <select id="location" name="location" required>
             <option value="">Select a location</option>
-            <option value="new-york">New York</option>
-            <option value="london">London</option>
-            <option value="tokyo">Tokyo</option>
-            <option value="paris">Paris</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="bengaluru">Bengaluru</option>
+            <option value="kolkata">Kolkata</option>
+            <option value="delhi">Delhi</option>
         </select>
 
         <div class="checkbox-group">
-            <label>Event Interests</label>
+            <label>Choose events you're interested in</label>
+            <div class="label-container">
             <label><input type="checkbox" name="interests" value="tech"> Tech Events</label><br>
             <label><input type="checkbox" name="interests" value="sports"> Sports</label><br>
             <label><input type="checkbox" name="interests" value="concerts"> Concerts</label><br>
             <label><input type="checkbox" name="interests" value="art"> Art Exhibitions</label><br>
             <label><input type="checkbox" name="interests" value="networking"> Networking</label><br>
+        </div>
         </div>
 
         <button type="submit">Register</button>

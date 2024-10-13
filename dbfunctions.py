@@ -41,6 +41,7 @@ def register_user(email, password, first_name, last_name, gender, location, inte
         cursor.execute(command)
 
     conn.commit()
+    print("committed")
     conn.close()
 
 def create_event(name, type, venue, location, date, start_time, end_time, user_email, desc):
@@ -81,7 +82,7 @@ def get_user_location(user_email):
 def get_full_name(user_email):
     conn = sqlite3.connect("database.db", timeout=10)
     cursor = conn.cursor()
-    cursor.execute(f"select concat(first_name, ' ', last_name) from users where email='{user_email}'")
+    cursor.execute(f"select first_name || ' ' || last_name from users where email='{user_email}'")
     name = cursor.fetchone()[0]
     conn.close()
 
