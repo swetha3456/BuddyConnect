@@ -22,12 +22,13 @@ def authenticate_user(username, password):
     conn.close()
     return password == expected_password
 
-def register_user(email, password, first_name, last_name, gender, interests):
-    command = f"""insert into users(first_name, last_name, email, password, gender) values(
+def register_user(email, password, first_name, last_name, gender, location, interests):
+    command = f"""insert into users(first_name, last_name, email, password, location, gender) values(
         '{first_name}',
         '{last_name}',
         '{email}',
         '{password}',
+        '{location}',
         '{gender}'
     );"""
 
@@ -42,10 +43,10 @@ def register_user(email, password, first_name, last_name, gender, interests):
     conn.commit()
     conn.close()
 
-def create_event(name, type, venue, date, start_time, end_time, user_email):
+def create_event(name, type, venue, location, date, start_time, end_time, user_email):
     command = f"""insert into 
-    events(event_name, event_type, venue, event_date, start_time, end_time, created_by) values(
-        '{name}', '{type}', '{venue}', {date}, {start_time}, {end_time}, '{user_email}'
+    events(event_name, event_type, venue, event_date, start_time, end_time, location, created_by) values(
+        '{name}', '{type}', '{venue}', {date}, {start_time}, {end_time}, '{location}', {user_email}'
     );"""
 
     conn = sqlite3.connect("database.db")
@@ -56,8 +57,9 @@ def create_event(name, type, venue, date, start_time, end_time, user_email):
 
 def get_relevant_events(email):
     command = f"""select * from events
-    where event_type in (select interest from user_interests where email={email})
-    and event_date >= now() sort by event_date desc;"""
+    where event_type in (select interest from user_interests where email='{email}')
+    and event_date >= now() and location = (select location from users where where email='{email}')
+    sort by event_date desc;"""
 
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()

@@ -47,6 +47,13 @@
         </div>
 
         <button type="submit">Register</button>
+        <p class="ques">Already have an account?</p><button class="btn" type="submit" value="Login" onclick="redirectLogin()">Login</button>
+        <script>
+            function redirectLogin(){
+                console.log("");
+                window.location.href = "{{ url_for('login') }}";
+            }
+        </script>
     </form>
 </div>
 
