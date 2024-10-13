@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Buddy</title>
+    <title>BuddyConnect</title>
 </head>
 <body>
 
-    <h1>Event Buddy Home Page</h1>
+    <h1>BuddyConnect</h1>
 
-    <button onclick="window.location.href='find-buddy.html'">Find Buddy for a New Event</button>
-    <button onclick="window.location.href='my-events.html'">My Events</button>
+    <button onclick="window.location.href='{{ url_for('new_event') }}'">Find Buddy for a New Event</button>
 
     <h2>Events you may be interested in:</h2>
 

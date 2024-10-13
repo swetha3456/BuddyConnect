@@ -32,5 +32,27 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/newEvent", methods = ["GET", "POST"])
+def new_event():
+    if "user_email" not in session:
+        return redirect(url_for("login"))
+    
+    if request.method == "POST":
+        create_event(
+            request.form["eventName"],
+            request.form["eventType"],
+            request.form["venue"],
+            get_user_location(session["user_email"]),
+            request.form["eventDate"],
+            request.form["startTime"],
+            request.form["endTime"],
+            session["user_email"],
+            request.form["eventDescription"]
+        )
+        
+        return redirect(url_for("home"))
+    
+    return render_template("addNewEvent.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

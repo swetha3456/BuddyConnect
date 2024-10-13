@@ -43,10 +43,10 @@ def register_user(email, password, first_name, last_name, gender, location, inte
     conn.commit()
     conn.close()
 
-def create_event(name, type, venue, location, date, start_time, end_time, user_email):
+def create_event(name, type, venue, location, date, start_time, end_time, user_email, desc):
     command = f"""insert into 
-    events(event_name, event_type, venue, event_date, start_time, end_time, location, created_by) values(
-        '{name}', '{type}', '{venue}', {date}, {start_time}, {end_time}, '{location}', {user_email}'
+    events(event_name, event_type, venue, event_date, start_time, end_time, location, description, created_by) values(
+        '{name}', '{type}', '{venue}', '{date}', '{start_time}', '{end_time}', '{location}', '{desc}', '{user_email}'
     );"""
 
     conn = sqlite3.connect("database.db")
@@ -63,24 +63,20 @@ def get_relevant_events(email):
 
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
-    result = cursor.execute(command)
+    cursor.execute(command)
+    result = cursor.fetchall()
     conn.close()
 
     return result
 
-def send_request(event_id, requesting_user):
+def get_user_location(user_email):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
-    cursor.execute("insert into user_requests(event_id, user_email) values('{event_id}', '{requesting_user}')")
-    conn.commit()
+    cursor.execute(f"select location from users where email='{user_email}'")
+    location = cursor.fetchone()[0]
     conn.close()
 
-def accept_request(event_id, requesting_user):
-    conn = sqlite3.connect("database.db")
-    cursor = conn.cursor()
-    cursor.execute("update user_requests set status='ACCEPTED' where event_id='{event_id}' and user_email='{requesting_user}'")
-    conn.commit()
-    conn.close()
+    return location
 
 if __name__ == "__main__":
     init_db()
