@@ -1,6 +1,7 @@
 from flask import Flask, render_template, session, url_for, redirect, request, flash
 from dbfunctions import *
 from datetime import datetime
+from email_notif import send_email
 
 app = Flask(__name__)
 app.secret_key = b"030a8ee0eb274b3e7fd9db490b0fd6a532b1fa1f1fd6825c5852c7363358c4b6"
@@ -79,6 +80,36 @@ def new_event():
         return redirect(url_for("home"))
     
     return render_template("addNewEvent.html")
+
+@app.route("/events/<int:eventID>", methods = ["GET", "POST"])
+def event_details(eventID):
+    if request.method == "POST":
+        send_email(eventID, session["user_email"])
+        return redirect(url_for("home"))
+
+    event_info = get_event_details(eventID)
+
+    date_object = datetime.strptime(event_info[5], r"%Y-%m-%d")
+    formatted_date = date_object.strftime("%B %-d, %Y")
+
+    starttime_object = datetime.strptime(event_info[6], "%H:%M")
+    endtime_object = datetime.strptime(event_info[7], "%H:%M")
+    formatted_starttime = starttime_object.strftime("%I:%M %p")
+    formatted_endtime = endtime_object.strftime("%I:%M %p")
+
+    context = {
+        "eventName" : event_info[1],
+        "eventType" : event_info[2],
+        "venue" : event_info[3],
+        "startTime" : formatted_starttime,
+        "endTime" : formatted_endtime,
+        "eventDate" : formatted_date,
+        "description" : event_info[8],
+        "userFullName" : get_full_name(event_info[9]),
+        "pastEventsCount" : num_events_posted(event_info[9])
+    }
+
+    return render_template("eventpage.html", context=context)
 
 if __name__ == "__main__":
     app.run(debug=True)

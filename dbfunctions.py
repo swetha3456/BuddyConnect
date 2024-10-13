@@ -87,5 +87,23 @@ def get_full_name(user_email):
 
     return name
 
+def get_event_details(event_id):
+    conn = sqlite3.connect("database.db", timeout=10)
+    cursor = conn.cursor()
+    cursor.execute(f"select * where event_id={event_id}")
+    details = cursor.fetchone()
+    conn.close()
+
+    return details
+
+def num_events_posted(email):
+    conn = sqlite3.connect("database.db", timeout=10)
+    cursor = conn.cursor()
+    cursor.execute(f"select count(*) from events where created_by='{email}'")
+    number = cursor.fetchone()[0]
+    conn.close()
+
+    return number
+
 if __name__ == "__main__":
     init_db()

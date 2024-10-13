@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuddyConnect</title>
+</head>
+<body>
+
+    <button onclick="window.location.href='{{ url_for('home') }}'">Back</button>
+
+    <h1>{{ context["eventName"] }}</h1>
+
+    <p><strong>Event Type:</strong> {{ context["eventType"] }}</p>
+    <p><strong>Date:</strong> {{ context["eventDate"] }}</p>
+    <p><strong>Time:</strong> {{ context["startTime"] }} - {{ context["endTime"] }}</p>
+    <p><strong>Venue:</strong> {{ context["venue"] }}</p>
+    <p><strong>Description:</strong> {{ context["description"] }}</p>
+
+    <h2>Posted By</h2>
+    <p><strong>Name:</strong> {{ context["userFullName"] }}</p>
+    <p><strong>Past Events Posted:</strong> {{ context["pastEventsCount"] }}</p>
+
+    <form method="POST">
+        <button type="submit">Share Contact Details</button>
+    </form>
+
+</body>
+</html>
