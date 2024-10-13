@@ -15,12 +15,10 @@ BuddyConnect is a simple application that helps users find a buddy to attend eve
 
     ```bash
     pip install flask
-
 2. Run ```dbfunctions.py``` to create the database. A file named ```database.db``` should be created.
 
     ```bash
     python3 dbfunctions.py
-
 2. Run ```app.py``` and open the specified port on your browser.
 
     ```bash
